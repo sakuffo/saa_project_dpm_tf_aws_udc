@@ -262,3 +262,33 @@ resource "aws_instance" "db-saz-a" {
     Name = join("-", ["db-instance", count.index + 1, "a"])
   }
 }
+
+resource "aws_s3_bucket" "primary-s3-bucket" {
+  provider = aws.primary
+  bucket = "saa-primary-s3-cloud-storage"
+  acl = "public-read"
+
+  tags = {
+    Name = "saa-primary-s3-cloud-storage"
+    env = "dev-udc"
+  }
+
+  versioning  {
+    enabled = true
+  }
+}
+
+resource "aws_s3_bucket" "secondary-s3-bucket" {
+  provider = aws.secondary
+  bucket = "saa-secondary-s3-cloud-storage"
+  acl = "public-read"
+
+  tags = {
+    Name = "saa-secondary-s3-cloud-storage"
+    env = "dev-udc"
+  }
+
+  versioning  {
+    enabled = true
+  }
+}
