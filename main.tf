@@ -186,7 +186,7 @@ resource "aws_key_pair" "secondary-key" {
 
 resource "aws_instance" "web-server-paz-a" {
   provider = aws.primary
-  count = 2
+  count = 1
   ami = data.aws_ssm_parameter.amz2-ami-primary.value
   instance_type = "t2.micro"
   key_name = aws_key_pair.primary-key.key_name
@@ -199,7 +199,7 @@ resource "aws_instance" "web-server-paz-a" {
 
 resource "aws_instance" "web-server-paz-b" {
   provider = aws.primary
-  count = 2
+  count = 1
   ami = data.aws_ssm_parameter.amz2-ami-primary.value
   instance_type = "t2.micro"
   key_name = aws_key_pair.primary-key.key_name
@@ -226,7 +226,7 @@ resource "aws_instance" "db-paz-a" {
 
 resource "aws_instance" "web-server-saz-a" {
   provider = aws.secondary
-  count = 2
+  count = 1
   ami = data.aws_ssm_parameter.amz2-ami-secondary.value
   instance_type = "t2.micro"
   key_name = aws_key_pair.secondary-key.key_name
@@ -239,7 +239,7 @@ resource "aws_instance" "web-server-saz-a" {
 
 resource "aws_instance" "web-server-saz-b" {
   provider = aws.secondary
-  count = 2
+  count = 1
   ami = data.aws_ssm_parameter.amz2-ami-secondary.value
   instance_type = "t2.micro"
   key_name = aws_key_pair.secondary-key.key_name
@@ -250,7 +250,7 @@ resource "aws_instance" "web-server-saz-b" {
   }
 }
 
-resource "aws_instance" "db-saz-a" {
+resource "aws_instance" "db-saz-b" {
   provider = aws.secondary
   count = 0
   ami = data.aws_ssm_parameter.amz2-ami-secondary.value
@@ -259,14 +259,14 @@ resource "aws_instance" "db-saz-a" {
   associate_public_ip_address = false
   subnet_id = aws_subnet.secondary-subnet-01.id
   tags = {
-    Name = join("-", ["db-instance", count.index + 1, "a"])
+    Name = join("-", ["db-instance", count.index + 1, "b"])
   }
 }
 
 resource "aws_s3_bucket" "primary-s3-bucket" {
   provider = aws.primary
   bucket = "saa-primary-s3-cloud-storage"
-  acl = "public-read"
+  acl = "private"
 
   tags = {
     Name = "saa-primary-s3-cloud-storage"
@@ -281,7 +281,7 @@ resource "aws_s3_bucket" "primary-s3-bucket" {
 resource "aws_s3_bucket" "secondary-s3-bucket" {
   provider = aws.secondary
   bucket = "saa-secondary-s3-cloud-storage"
-  acl = "public-read"
+  acl = "private"
 
   tags = {
     Name = "saa-secondary-s3-cloud-storage"
