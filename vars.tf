@@ -20,10 +20,10 @@ variable "secondary-region" {
 
 variable "secondary-public-subnet-01" {
   type    = string
-  default = "us-east-1a"
+  default = "us-west-2a"
 }
 
 variable "secondary-public-subnet-02" {
   type    = string
-  default = "us-east-1b"
+  default = "us-west-2b"
 }
