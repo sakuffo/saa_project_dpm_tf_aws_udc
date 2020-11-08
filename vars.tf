@@ -29,6 +29,6 @@ variable "secondary-public-subnet-02" {
 }
 
 variable "amzn2-ami-x86" {
-  type = string
+  type    = string
   default = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
 }
