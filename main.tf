@@ -40,21 +40,23 @@ resource "aws_vpc" "primary-vpc" {
 
 # Primary Subnet AZ1
 resource "aws_subnet" "primary-subnet-01" {
+  provider         = aws.primary
   vpc_id            = aws_vpc.primary-vpc.id
   cidr_block        = "10.0.1.0/24"
   availability_zone = var.primary-public-subnet-01
 
-  tag = {
+  tags = {
     Name = "Primary Subnet 01"
   }
 }
 
 resource "aws_subnet" "primary-subnet-02" {
+  provider         = aws.primary
   vpc_id            = aws_vpc.primary-vpc.id
-  cidr_block        = "10.0.1.0/24"
+  cidr_block        = "10.0.2.0/24"
   availability_zone = var.primary-public-subnet-02
 
-  tag = {
+  tags = {
     Name = "Primary Subnet 02"
   }
 }
