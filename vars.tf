@@ -33,6 +33,16 @@ variable "amzn2-ami-x86" {
   default = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
 }
 
+variable "web-instance-type" {
+  type = string
+  default = "t2.micro"
+}
+
+variable "db-instance-type" {
+  type = string
+  default = "t3.medium"
+}
+
 variable "web-pvpc-count" {
   type = number
   default = 1
@@ -51,4 +61,19 @@ variable "db-pvpc-count" {
 variable "db-svpc-count" {
   type = number
   default = 1
+}
+
+variable "storage-type" {
+  type = string
+  default = "gp2"
+}
+
+variable "web-storage" {
+  type = number
+  default = 10
+}
+
+variable "db-storage" {
+  type = number
+  default = 20
 }
