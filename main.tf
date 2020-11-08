@@ -25,7 +25,9 @@ provider "aws" {
   region  = var.secondary-region
 }
 
-# VPC definitions
+## Primary VPC definitions
+
+## Primary VPC
 resource "aws_vpc" "primary-vpc" {
   provider         = aws.primary
   cidr_block       = "10.0.0.0/16"
@@ -36,6 +38,29 @@ resource "aws_vpc" "primary-vpc" {
   }
 }
 
+# Primary Subnet AZ1
+resource "aws_subnet" "primary-subnet-01" {
+  vpc_id            = aws_vpc.primary-vpc.id
+  cidr_block        = "10.0.1.0/24"
+  availability_zone = var.primary-public-subnet-01
+
+  tag = {
+    Name = "Primary Subnet 01"
+  }
+}
+
+resource "aws_subnet" "primary-subnet-02" {
+  vpc_id            = aws_vpc.primary-vpc.id
+  cidr_block        = "10.0.1.0/24"
+  availability_zone = var.primary-public-subnet-02
+
+  tag = {
+    Name = "Primary Subnet 02"
+  }
+}
+
+
+# Secondary VPC definitions
 resource "aws_vpc" "secondary-vpc" {
   provider         = aws.secondary
   cidr_block       = "172.0.0.0/16"
