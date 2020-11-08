@@ -32,3 +32,23 @@ variable "amzn2-ami-x86" {
   type    = string
   default = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
 }
+
+variable "web-pvpc-count" {
+  type = number
+  default = 1
+}
+
+variable "web-svpc-count" {
+  type = number
+  default = 1
+}
+
+variable "db-pvpc-count" {
+  type = number
+  default = 1
+}
+
+variable "db-svpc-count" {
+  type = number
+  default = 1
+}

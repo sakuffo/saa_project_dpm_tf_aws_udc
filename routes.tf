@@ -28,11 +28,6 @@ resource "aws_internet_gateway" "primary-vpc-igw" {
   }
 }
 
-
-
-
-
-
 # Secondary Route table
 resource "aws_route_table" "secondary-vpc-rt" {
   provider = aws.secondary

@@ -52,10 +52,6 @@ resource "aws_vpc" "secondary-vpc" {
   }
 }
 
-
-
-
-
 resource "aws_s3_bucket" "primary-s3-bucket" {
   provider = aws.primary
   bucket   = "saa-primary-s3-cloud-storage"

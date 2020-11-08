@@ -24,7 +24,7 @@ resource "aws_key_pair" "secondary-key" {
 
 resource "aws_instance" "web-server-paz-a" {
   provider                    = aws.primary
-  count                       = 1
+  count                       = var.web-pvpc-count
   ami                         = data.aws_ssm_parameter.amz2-ami-primary.value
   instance_type               = "t2.micro"
   key_name                    = aws_key_pair.primary-key.key_name
@@ -37,7 +37,7 @@ resource "aws_instance" "web-server-paz-a" {
 
 resource "aws_instance" "web-server-paz-b" {
   provider                    = aws.primary
-  count                       = 1
+  count                       = var.web-pvpc-count
   ami                         = data.aws_ssm_parameter.amz2-ami-primary.value
   instance_type               = "t2.micro"
   key_name                    = aws_key_pair.primary-key.key_name
@@ -50,7 +50,7 @@ resource "aws_instance" "web-server-paz-b" {
 
 resource "aws_instance" "db-paz-a" {
   provider                    = aws.primary
-  count                       = 0
+  count                       = var.db-pvpc-count
   ami                         = data.aws_ssm_parameter.amz2-ami-primary.value
   instance_type               = "t2.medium"
   key_name                    = aws_key_pair.primary-key.key_name
@@ -64,7 +64,7 @@ resource "aws_instance" "db-paz-a" {
 
 resource "aws_instance" "web-server-saz-a" {
   provider                    = aws.secondary
-  count                       = 1
+  count                       = var.web-svpc-count
   ami                         = data.aws_ssm_parameter.amz2-ami-secondary.value
   instance_type               = "t2.micro"
   key_name                    = aws_key_pair.secondary-key.key_name
@@ -77,7 +77,7 @@ resource "aws_instance" "web-server-saz-a" {
 
 resource "aws_instance" "web-server-saz-b" {
   provider                    = aws.secondary
-  count                       = 1
+  count                       = var.web-svpc-count
   ami                         = data.aws_ssm_parameter.amz2-ami-secondary.value
   instance_type               = "t2.micro"
   key_name                    = aws_key_pair.secondary-key.key_name
@@ -90,7 +90,7 @@ resource "aws_instance" "web-server-saz-b" {
 
 resource "aws_instance" "db-saz-b" {
   provider                    = aws.secondary
-  count                       = 0
+  count                       = var.db-svpc-count
   ami                         = data.aws_ssm_parameter.amz2-ami-secondary.value
   instance_type               = "t2.medium"
   key_name                    = aws_key_pair.secondary-key.key_name
