@@ -12,11 +12,19 @@ terraform {
 }
 
 provider "aws" {
+  alias   = "primary"
   profile = "default"
-  region  = "us-east-1"
+  region  = var.primary-region
+}
+
+provider "aws" {
+  alias   = "secondary"
+  profile = "default"
+  region  = var.secondary-region
 }
 
 resource "aws_vpc" "primary-vpc" {
+  provider         = aws.primary
   cidr_block       = "10.0.0.0/16"
   instance_tenancy = "default"
 
@@ -26,6 +34,7 @@ resource "aws_vpc" "primary-vpc" {
 }
 
 resource "aws_vpc" "secondary-vpc" {
+  provider         = aws.secondary
   cidr_block       = "172.0.0.0/16"
   instance_tenancy = "default"
 
