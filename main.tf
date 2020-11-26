@@ -1,7 +1,3 @@
-# TODO: Designate a cloud provider, region, and credentials
-# TODO: provision 4 AWS t2.micro EC2 instances named Udacity T2
-# TODO: provision 2 m4.large EC2 instances named Udacity M4
-
 ## Terraform provider definitions
 terraform {
   required_providers {
@@ -16,13 +12,13 @@ terraform {
 provider "aws" {
   alias   = "primary"
   profile = "default"
-  region  = var.primary-region
+  region  = var.primary.region
 }
 
 provider "aws" {
   alias   = "secondary"
   profile = "default"
-  region  = var.secondary-region
+  region  = var.secondary.region
 }
 
 ## Primary VPC definitions
@@ -37,9 +33,6 @@ resource "aws_vpc" "primary-vpc" {
     Name = "primary-vpc"
   }
 }
-
-
-
 
 # Secondary VPC definitions
 resource "aws_vpc" "secondary-vpc" {
