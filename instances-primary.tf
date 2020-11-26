@@ -12,15 +12,15 @@ resource "aws_key_pair" "primary-key" {
 
 resource "aws_instance" "web-server-paz-a" {
   provider                    = aws.primary
-  count                       = var.web-pvpc-count
+  count                       = var.primary-web.count
   ami                         = data.aws_ssm_parameter.amz2-ami-primary.value
-  instance_type               = var.web-instance-type
+  instance_type               = var.primary-web.instance-type
   key_name                    = aws_key_pair.primary-key.key_name
   associate_public_ip_address = true
   subnet_id                   = aws_subnet.primary-subnet-01.id
   root_block_device {
-    volume_type = var.storage-type
-    volume_size = var.web-storage
+    volume_type = var.primary-web.storage-type
+    volume_size = var.primary-web.storage-size
   }
 
   tags = {
@@ -30,9 +30,9 @@ resource "aws_instance" "web-server-paz-a" {
 
 resource "aws_instance" "web-server-paz-b" {
   provider                    = aws.primary
-  count                       = var.web-pvpc-count
+  count                       = var.primary-web.count
   ami                         = data.aws_ssm_parameter.amz2-ami-primary.value
-  instance_type               = var.web-instance-type
+  instance_type               = var.primary-web.instance-type
   key_name                    = aws_key_pair.primary-key.key_name
   associate_public_ip_address = true
   subnet_id                   = aws_subnet.primary-subnet-02.id
@@ -40,16 +40,16 @@ resource "aws_instance" "web-server-paz-b" {
     Name = join("-", ["web-server", count.index + 1, "b"])
   }
   root_block_device {
-    volume_type = var.storage-type
-    volume_size = var.web-storage
+    volume_type = var.primary-web.storage-type
+    volume_size = var.primary-web.storage-size
   }
 }
 
 resource "aws_instance" "db-paz-a" {
   provider                    = aws.primary
-  count                       = var.db-pvpc-count
+  count                       = var.primary-db.count
   ami                         = data.aws_ssm_parameter.amz2-ami-primary.value
-  instance_type               = var.db-instance-type
+  instance_type               = var.primary-db.instance-type
   key_name                    = aws_key_pair.primary-key.key_name
   associate_public_ip_address = false
   subnet_id                   = aws_subnet.primary-subnet-01.id
@@ -57,8 +57,8 @@ resource "aws_instance" "db-paz-a" {
     Name = join("-", ["db-instance", count.index + 1, "a"])
   }
   root_block_device {
-    volume_type = var.storage-type
-    volume_size = var.db-storage
+    volume_type = var.primary-db.storage-type
+    volume_size = var.primary-db.storage-size
   }
 }
 

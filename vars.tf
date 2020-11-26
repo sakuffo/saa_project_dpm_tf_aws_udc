@@ -36,12 +36,12 @@ variable "primary-web" {
     instance-type = string
     count         = number
     storage-type  = string
-    storage-size = number
+    storage-size  = number
   })
   default = {
     instance-type = "t2.micro"
     count         = 1
-    storage-type = "gp2"
+    storage-type  = "gp2"
     storage-size  = 10
   }
 }
@@ -57,7 +57,7 @@ variable "primary-db" {
     instance-type = "t2.medium"
     count         = 1
     storage-size  = 20
-    storage-type = "gp2"
+    storage-type  = "gp2"
   }
 }
 
@@ -66,7 +66,7 @@ variable "secondary-web" {
     instance-type = string
     count         = number
     storage-type  = string
-    storage-size = number
+    storage-size  = number
   })
   default = {
     instance-type = "t2.micro"
@@ -87,7 +87,7 @@ variable "secondary-db" {
     instance-type = "t2.medium"
     count         = 1
     storage-size  = 20
-    storage-type = "gp2"
+    storage-type  = "gp2"
   }
 }
 
