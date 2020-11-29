@@ -1,17 +1,16 @@
 resource "aws_security_group" "primary-web-tier" {
   provider    = aws.primary
-  name        = "allow_web_traffic"
-  description = "Allow Web traffic Inbound"
+  name        = "primary-web-tier"
+  description = "Web Tier SG"
   vpc_id      = aws_vpc.primary-vpc.id
 
-# ACM not yet configured
-#   ingress {
-#     description = "HTTPS Traffic"
-#     from_port   = 443
-#     to_port     = 443
-#     protocol    = "tcp"
-#     cidr_blocks = [aws_vpc.primary-vpc.cidr_block]
-#   }
+  ingress {
+    description = "SSH"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = [aws_vpc.primary-vpc.cidr_block, "0.0.0.0/0"] #SSH from anywhere not secure. However rsa private key needed.
+  }
 
   ingress {
     description = "HTTP Traffc"
@@ -38,8 +37,8 @@ resource "aws_security_group" "primary-web-tier" {
 
 resource "aws_security_group" "primary-db-tier" {
   provider    = aws.primary
-  name        = "allow_web_to_db_traffic"
-  description = "Allow Web tier to DB tier traffic Inbound"
+  name        = "primary-db-tier"
+  description = "DB Tier SG"
   vpc_id      = aws_vpc.primary-vpc.id
 
   ingress {
@@ -65,18 +64,17 @@ resource "aws_security_group" "primary-db-tier" {
 
 resource "aws_security_group" "secondary-web-tier" {
   provider    = aws.secondary
-  name        = "allow_web_traffic"
-  description = "Allow Web traffic Inbound"
+  name        = "secondary-web-tier"
+  description = "Web Tier SG"
   vpc_id      = aws_vpc.secondary-vpc.id
 
-# ACM not yet configured
-#   ingress {
-#     description = "HTTPS Traffic"
-#     from_port   = 443
-#     to_port     = 443
-#     protocol    = "tcp"
-#     cidr_blocks = [aws_vpc.secondary-vpc.cidr_block]
-#   }
+  ingress {
+    description = "SSH"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = [aws_vpc.secondary-vpc.cidr_block, "0.0.0.0/0"] #SSH from anywhere not secure. However rsa private key needed.
+  }
 
   ingress {
     description = "HTTP Traffc"
@@ -103,8 +101,8 @@ resource "aws_security_group" "secondary-web-tier" {
 
 resource "aws_security_group" "secondary-db-tier" {
   provider    = aws.secondary
-  name        = "allow_web_to_db_traffic"
-  description = "Allow Web tier to DB tier traffic Inbound"
+  name        = "secondary-db-tier"
+  description = "DB Tier SG"
   vpc_id      = aws_vpc.secondary-vpc.id
 
   ingress {

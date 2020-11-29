@@ -9,3 +9,13 @@ output "secondary-vpc-id" {
   description = "Output the ID of the secondary VPC instance"
   depends_on  = [aws_vpc.secondary-vpc]
 }
+
+output "primary-loadbalancer-dns-name" {
+  value       = aws_lb.primary_front_end_alb.dns_name
+  depends_on = [ aws_lb.primary_front_end_alb ]
+}
+
+output "secondary-loadbalancer-dns-name" {
+  value       = aws_lb.secondary_front_end_alb.dns_name
+  depends_on = [ aws_lb.secondary_front_end_alb ]
+}

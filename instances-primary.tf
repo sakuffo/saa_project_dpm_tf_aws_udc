@@ -27,6 +27,7 @@ resource "aws_instance" "web-server-paz-a" {
     var.udc_default_tags,
     {
       Name = join("-", ["Udacity t2 - web-server", count.index + 1, "a"])
+      Tier = "Web"
     }
   )
   root_block_device {
@@ -49,6 +50,7 @@ resource "aws_instance" "web-server-paz-b" {
     var.udc_default_tags,
     {
       Name = join("-", ["Udacity t2 web-server", count.index + 1, "b"])
+      Tier = "Web"
     }
   )
   root_block_device {
@@ -71,6 +73,7 @@ resource "aws_instance" "db-paz-a" {
     var.udc_default_tags,
     {
       Name = join("-", ["Udacity m4 - db-instance", count.index + 1, "a"])
+      Tier = "Db"
     }
   )
   root_block_device {
