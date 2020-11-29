@@ -8,7 +8,7 @@ data "aws_ssm_parameter" "amz2-ami-primary" {
 ## EC2 Primary-VPC Instance ssh keys
 resource "aws_key_pair" "primary-key" {
   provider   = aws.primary
-  key_name   = "udc_rsa_primary"
+  key_name   = "udc_rsa"
   public_key = file(var.ssh_path)
 }
 

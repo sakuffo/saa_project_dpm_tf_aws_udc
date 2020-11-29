@@ -53,13 +53,13 @@ resource "aws_vpc" "secondary-vpc" {
 
 resource "aws_s3_bucket" "primary-s3-bucket" {
   provider = aws.primary
-  bucket   = "saa-primary-s3-cloud-storage-202011-acg"
+  bucket   = "saa-primary-s3-cloud-storage-202011-acg2"
   acl      = "private"
 
   tags = merge(
     var.udc_default_tags,
     {
-      Name = "saa-secondary-s3-cloud-storage-202011-acg"
+      Name = "saa-secondary-s3-cloud-storage-202011-acg2"
 
     }
   )
@@ -71,13 +71,13 @@ resource "aws_s3_bucket" "primary-s3-bucket" {
 
 resource "aws_s3_bucket" "secondary-s3-bucket" {
   provider = aws.secondary
-  bucket   = "saa-secondary-s3-cloud-storage-202011-acg"
+  bucket   = "saa-secondary-s3-cloud-storage-202011-acg2"
   acl      = "private"
 
   tags = merge(
     var.udc_default_tags,
     {
-      Name = "saa-secondary-s3-cloud-storage-202011-acg"
+      Name = "saa-secondary-s3-cloud-storage-202011-acg2"
 
     }
   )

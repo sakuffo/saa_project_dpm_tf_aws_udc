@@ -5,8 +5,8 @@ data "aws_ssm_parameter" "amz2-ami-secondary" {
 }
 
 resource "aws_key_pair" "secondary-key" {
-  provider   = aws.primary
-  key_name   = "udc_rsa_secondary"
+  provider   = aws.secondary
+  key_name   = "udc_rsa"
   public_key = file(var.ssh_path)
 }
 
