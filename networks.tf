@@ -77,7 +77,7 @@ resource "aws_subnet" "secondary-subnet-02" {
 resource "aws_subnet" "primary-private-subnet-02" {
   provider          = aws.secondary
   vpc_id            = aws_vpc.secondary-vpc.id
-  cidr_block        = "172.10.2.0/24"
+  cidr_block        = "172.10.3.0/24"
   availability_zone = var.secondary.private-subnet-01
 
   tags = merge(
