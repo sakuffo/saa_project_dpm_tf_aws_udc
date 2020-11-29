@@ -11,11 +11,11 @@ output "secondary-vpc-id" {
 }
 
 output "primary-loadbalancer-dns-name" {
-  value       = aws_lb.primary_front_end_alb.dns_name
-  depends_on = [ aws_lb.primary_front_end_alb ]
+  value      = aws_lb.primary_front_end_alb.dns_name
+  depends_on = [aws_lb.primary_front_end_alb]
 }
 
 output "secondary-loadbalancer-dns-name" {
-  value       = aws_lb.secondary_front_end_alb.dns_name
-  depends_on = [ aws_lb.secondary_front_end_alb ]
+  value      = aws_lb.secondary_front_end_alb.dns_name
+  depends_on = [aws_lb.secondary_front_end_alb]
 }

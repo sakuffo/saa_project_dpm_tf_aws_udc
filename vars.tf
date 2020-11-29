@@ -22,3 +22,8 @@ variable "db_user_data_path" {
   type    = string
   default = "./user_data/database.sh"
 }
+
+variable "web-server-port" {
+  type = number
+  default = 80
+}

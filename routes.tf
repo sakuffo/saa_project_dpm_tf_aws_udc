@@ -68,3 +68,5 @@ resource "aws_internet_gateway" "secondary-vpc-igw" {
     }
   )
 }
+
+

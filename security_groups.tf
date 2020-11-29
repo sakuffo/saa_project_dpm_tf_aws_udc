@@ -14,8 +14,8 @@ resource "aws_security_group" "primary-web-tier" {
 
   ingress {
     description = "HTTP Traffc"
-    from_port   = 80
-    to_port     = 80
+    from_port   = web-server-port
+    to_port     = web-server-port
     protocol    = "tcp"
     cidr_blocks = [aws_vpc.primary-vpc.cidr_block, "0.0.0.0/0"]
   }
@@ -78,8 +78,8 @@ resource "aws_security_group" "secondary-web-tier" {
 
   ingress {
     description = "HTTP Traffc"
-    from_port   = 80
-    to_port     = 80
+    from_port   = web-server-port
+    to_port     = web-server-port
     protocol    = "tcp"
     cidr_blocks = [aws_vpc.secondary-vpc.cidr_block, "0.0.0.0/0"]
   }
