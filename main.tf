@@ -51,38 +51,38 @@ resource "aws_vpc" "secondary-vpc" {
   )
 }
 
-resource "aws_s3_bucket" "primary-s3-bucket" {
-  provider = aws.primary
-  bucket   = "saa-primary-s3-cloud-storage-202011-acg2"
-  acl      = "private"
+# resource "aws_s3_bucket" "primary-s3-bucket" {
+#   provider = aws.primary
+#   bucket   = "saa-primary-s3-cloud-storage-202011-acg2"
+#   acl      = "private"
 
-  tags = merge(
-    var.udc_default_tags,
-    {
-      Name = "saa-secondary-s3-cloud-storage-202011-acg2"
+#   tags = merge(
+#     var.udc_default_tags,
+#     {
+#       Name = "saa-secondary-s3-cloud-storage-202011-acg2"
 
-    }
-  )
+#     }
+#   )
 
-  versioning {
-    enabled = true
-  }
-}
+#   versioning {
+#     enabled = true
+#   }
+# }
 
-resource "aws_s3_bucket" "secondary-s3-bucket" {
-  provider = aws.secondary
-  bucket   = "saa-secondary-s3-cloud-storage-202011-acg2"
-  acl      = "private"
+# resource "aws_s3_bucket" "secondary-s3-bucket" {
+#   provider = aws.secondary
+#   bucket   = "saa-secondary-s3-cloud-storage-202011-acg2"
+#   acl      = "private"
 
-  tags = merge(
-    var.udc_default_tags,
-    {
-      Name = "saa-secondary-s3-cloud-storage-202011-acg2"
+#   tags = merge(
+#     var.udc_default_tags,
+#     {
+#       Name = "saa-secondary-s3-cloud-storage-202011-acg2"
 
-    }
-  )
+#     }
+#   )
 
-  versioning {
-    enabled = true
-  }
-}
+#   versioning {
+#     enabled = true
+#   }
+# }

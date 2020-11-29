@@ -1,6 +1,6 @@
 resource "aws_security_group" "primary-web-tier" {
   provider    = aws.primary
-  name        = "primary-web-tier"
+  name        = "primary-web-tier-sg"
   description = "Web Tier SG"
   vpc_id      = aws_vpc.primary-vpc.id
 
@@ -14,8 +14,8 @@ resource "aws_security_group" "primary-web-tier" {
 
   ingress {
     description = "HTTP Traffc"
-    from_port   = web-server-port
-    to_port     = web-server-port
+    from_port   = var.web-server-port
+    to_port     = var.web-server-port
     protocol    = "tcp"
     cidr_blocks = [aws_vpc.primary-vpc.cidr_block, "0.0.0.0/0"]
   }
@@ -30,14 +30,14 @@ resource "aws_security_group" "primary-web-tier" {
   tags = merge(
     var.udc_default_tags,
     {
-      Name = "primary-web-tier"
+      Name = "primary-web-tier-sg"
     }
   )
 }
 
 resource "aws_security_group" "primary-db-tier" {
   provider    = aws.primary
-  name        = "primary-db-tier"
+  name        = "primary-db-tier-sg"
   description = "DB Tier SG"
   vpc_id      = aws_vpc.primary-vpc.id
 
@@ -57,14 +57,14 @@ resource "aws_security_group" "primary-db-tier" {
   tags = merge(
     var.udc_default_tags,
     {
-      Name = "primary-db-tier"
+      Name = "primary-db-tier-sg"
     }
   )
 }
 
 resource "aws_security_group" "secondary-web-tier" {
   provider    = aws.secondary
-  name        = "secondary-web-tier"
+  name        = "secondary-web-tier-sg"
   description = "Web Tier SG"
   vpc_id      = aws_vpc.secondary-vpc.id
 
@@ -78,8 +78,8 @@ resource "aws_security_group" "secondary-web-tier" {
 
   ingress {
     description = "HTTP Traffc"
-    from_port   = web-server-port
-    to_port     = web-server-port
+    from_port   = var.web-server-port
+    to_port     = var.web-server-port
     protocol    = "tcp"
     cidr_blocks = [aws_vpc.secondary-vpc.cidr_block, "0.0.0.0/0"]
   }
@@ -94,14 +94,14 @@ resource "aws_security_group" "secondary-web-tier" {
   tags = merge(
     var.udc_default_tags,
     {
-      Name = "secondary-web-tier"
+      Name = "secondary-web-tier-sg"
     }
   )
 }
 
 resource "aws_security_group" "secondary-db-tier" {
   provider    = aws.secondary
-  name        = "secondary-db-tier"
+  name        = "secondary-db-tier-sg"
   description = "DB Tier SG"
   vpc_id      = aws_vpc.secondary-vpc.id
 
@@ -121,7 +121,7 @@ resource "aws_security_group" "secondary-db-tier" {
   tags = merge(
     var.udc_default_tags,
     {
-      Name = "secondary-db-tier"
+      Name = "secondary-db-tier-sg"
     }
   )
 }

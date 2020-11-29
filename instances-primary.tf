@@ -49,7 +49,7 @@ resource "aws_instance" "web-server-paz-b" {
   tags = merge(
     var.udc_default_tags,
     {
-      Name = join("-", ["Udacity t2 web-server", count.index + 1, "b"])
+      Name = join("-", ["Udacity t2 - web-server", count.index + 1, "b"])
       Tier = "Web"
     }
   )

@@ -1,7 +1,6 @@
 data "aws_ssm_parameter" "amz2-ami-secondary" {
   provider   = aws.secondary
   name       = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
-  depends_on = [aws_vpc.secondary-vpc]
 }
 
 resource "aws_key_pair" "secondary-key" {
@@ -24,7 +23,7 @@ resource "aws_instance" "web-server-saz-a" {
   tags = merge(
     var.udc_default_tags,
     {
-      Name = join("-", ["Udacity t2 web-server", count.index + 1, "a"])
+      Name = join("-", ["Udacity t2 - web-server", count.index + 1, "a"])
       Tier = "Web"
     }
   )
@@ -47,7 +46,7 @@ resource "aws_instance" "web-server-saz-b" {
   tags = merge(
     var.udc_default_tags,
     {
-      Name = join("-", ["Udacity t2 web-server", count.index + 1, "b"])
+      Name = join("-", ["Udacity t2 - web-server", count.index + 1, "b"])
       Tier = "Web"
     }
   )

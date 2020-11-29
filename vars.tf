@@ -27,3 +27,13 @@ variable "web-server-port" {
   type = number
   default = 80
 }
+
+variable "web_instace_per_vpc" {
+  type = number
+  default = 2
+}
+# This variable is a fix for a temporary chicken and egg problem
+# attaching multiple instances to a target group with a single resource requires  it knows how many instances to iterate through
+# To iterate through it needs to compute that come created instances
+# This has not yet happened on greenfield deployment
+# I will eventually fix this with some sot of for_each iterator however for time reasons I am going with this short fix
