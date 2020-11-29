@@ -1,97 +1,39 @@
-variable "primary" {
-  type = object({
-    region            = string
-    public-subnet-01  = string
-    public-subnet-02  = string
-    private-subnet-01 = string
-    private-subnet-02 = string
-  })
+variable "udc_default_tags" {
+  type = map
   default = {
-    region            = "us-east-1"
-    public-subnet-01  = "us-east-1a"
-    public-subnet-02  = "us-east-1b"
-    private-subnet-01 = "us-east-1a"
-    private-subnet-02 = "us-east-1b"
+    "courseWork" : "true",
+    "entity" : "udacity",
+    "program" : "aws-architect"
   }
-}
-
-variable "secondary" {
-  type = object({
-    region            = string
-    public-subnet-01  = string
-    public-subnet-02  = string
-    private-subnet-01 = string
-    private-subnet-02 = string
-  })
-  default = {
-    region            = "us-west-2"
-    public-subnet-01  = "us-west-2a"
-    public-subnet-02  = "us-west-2b"
-    private-subnet-01 = "us-west-2a"
-    private-subnet-02 = "us-west-2b"
-  }
-}
-variable "primary-web" {
-  type = object({
-    instance-type = string
-    count         = number
-    storage-type  = string
-    storage-size  = number
-  })
-  default = {
-    instance-type = "t2.micro"
-    count         = 1
-    storage-type  = "gp2"
-    storage-size  = 10
-  }
-}
-
-variable "primary-db" {
-  type = object({
-    instance-type = string
-    count         = number
-    storage-size  = number
-    storage-type  = string
-  })
-  default = {
-    instance-type = "t2.medium"
-    count         = 1
-    storage-size  = 20
-    storage-type  = "gp2"
-  }
-}
-
-variable "secondary-web" {
-  type = object({
-    instance-type = string
-    count         = number
-    storage-type  = string
-    storage-size  = number
-  })
-  default = {
-    instance-type = "t2.micro"
-    count         = 1
-    storage-type  = "gp2"
-    storage-size  = 10
-  }
-}
-
-variable "secondary-db" {
-  type = object({
-    instance-type = string
-    count         = number
-    storage-size  = number
-    storage-type  = string
-  })
-  default = {
-    instance-type = "t2.medium"
-    count         = 1
-    storage-size  = 20
-    storage-type  = "gp2"
-  }
+  description = "Tags to mark all resources for the course"
 }
 
 variable "amzn2-ami-x86" {
   type    = string
   default = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
 }
+
+variable "ssh_path" {
+  type    = string
+  default = "~/.ssh/udc_rsa.pub"
+}
+
+variable "db_user_data_path" {
+  type    = string
+  default = "./user_data/database.sh"
+}
+
+variable "web-server-port" {
+  type = number
+  default = 80
+}
+
+variable "web_instace_per_vpc" {
+  type = number
+  default = 2
+}
+# This variable is a fix for a temporary chicken and egg problem
+# attaching multiple instances to a target group with a single resource requires  it knows how many instances to iterate through
+# To iterate through it needs to compute that come created instances
+# This has not yet happened on greenfield deployment
+# I will eventually fix this with some sot of for_each iterator however for time reasons I am going with this short fix
