@@ -7,9 +7,12 @@ resource "aws_route_table" "primary-vpc-rt" {
     gateway_id = aws_internet_gateway.primary-vpc-igw.id
   }
 
-  tags = {
-    Name = "Primary VPC RT"
-  }
+  tags = merge(
+    var.udc_default_tags,
+    {
+      Name = "Primary VPC RT"
+    }
+  )
 }
 
 # Primary route table association. This will createthe rt applied to all subnets built in VPC
@@ -23,9 +26,12 @@ resource "aws_main_route_table_association" "primary-vpc-rt-assoc" {
 resource "aws_internet_gateway" "primary-vpc-igw" {
   provider = aws.primary
   vpc_id   = aws_vpc.primary-vpc.id
-  tags = {
-    Name = "primary-vpc-igw"
-  }
+  tags = merge(
+    var.udc_default_tags,
+    {
+      Name = "primary-vpc-igw"
+    }
+  )
 }
 
 # Secondary Route table
@@ -36,10 +42,12 @@ resource "aws_route_table" "secondary-vpc-rt" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.secondary-vpc-igw.id
   }
-
-  tags = {
-    Name = "Secondary VPC RT"
-  }
+  tags = merge(
+    var.udc_default_tags,
+    {
+      Name = "Secondary VPC RT"
+    }
+  )
 }
 
 # Secondary route table association. This will createthe rt applied to all subnets built in VPC
@@ -53,7 +61,10 @@ resource "aws_main_route_table_association" "secondary-vpc-rt-assoc" {
 resource "aws_internet_gateway" "secondary-vpc-igw" {
   provider = aws.secondary
   vpc_id   = aws_vpc.secondary-vpc.id
-  tags = {
-    Name = "secondary-vpc-igw"
-  }
+  tags = merge(
+    var.udc_default_tags,
+    {
+      Name = "secondary-vpc-igw"
+    }
+  )
 }
