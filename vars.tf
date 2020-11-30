@@ -24,12 +24,12 @@ variable "db_user_data_path" {
 }
 
 variable "web-server-port" {
-  type = number
+  type    = number
   default = 80
 }
 
 variable "web_instace_per_vpc" {
-  type = number
+  type    = number
   default = 2
 }
 # This variable is a fix for a temporary chicken and egg problem

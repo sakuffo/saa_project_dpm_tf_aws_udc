@@ -51,15 +51,16 @@ resource "aws_vpc" "secondary-vpc" {
   )
 }
 
+# To start up S3 buckets please change the bucket name in the variable file for primary and secondary
 # resource "aws_s3_bucket" "primary-s3-bucket" {
 #   provider = aws.primary
-#   bucket   = "saa-primary-s3-cloud-storage-202011-acg2"
+#   bucket   = var.primary.s3-bucket-01
 #   acl      = "private"
 
 #   tags = merge(
 #     var.udc_default_tags,
 #     {
-#       Name = "saa-secondary-s3-cloud-storage-202011-acg2"
+#       Name = var.primary.s3-bucket-01
 
 #     }
 #   )
@@ -71,7 +72,7 @@ resource "aws_vpc" "secondary-vpc" {
 
 # resource "aws_s3_bucket" "secondary-s3-bucket" {
 #   provider = aws.secondary
-#   bucket   = "saa-secondary-s3-cloud-storage-202011-acg2"
+#   bucket   = var.secondary.s3-bucket-01
 #   acl      = "private"
 
 #   tags = merge(

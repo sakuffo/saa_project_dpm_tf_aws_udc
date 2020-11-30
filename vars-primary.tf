@@ -5,6 +5,7 @@ variable "primary" {
     public-subnet-02  = string
     private-subnet-01 = string
     private-subnet-02 = string
+    s3-bucket-01      = string
   })
   default = {
     region            = "us-east-1"
@@ -12,6 +13,7 @@ variable "primary" {
     public-subnet-02  = "us-east-1b"
     private-subnet-01 = "us-east-1a"
     private-subnet-02 = "us-east-1b"
+    s3-bucket-01      = "saa-udc-primary-bucket-task-5"
   }
 }
 
@@ -38,8 +40,8 @@ variable "primary-db" {
     storage-type  = string
   })
   default = {
-    instance-type = "t2.micro"
-    count         = 1
+    instance-type = "m4.large"
+    count         = 0
     storage-size  = 20
     storage-type  = "gp2"
   }
