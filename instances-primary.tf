@@ -73,7 +73,7 @@ resource "aws_instance" "db-paz-a" {
     var.udc_default_tags,
     {
       Name = join("-", ["Udacity m4 - db-instance", count.index + 1, "a"])
-      Tier = "Db"
+      Tier = "DB"
     }
   )
   root_block_device {

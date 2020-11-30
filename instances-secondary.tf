@@ -1,6 +1,6 @@
 data "aws_ssm_parameter" "amz2-ami-secondary" {
-  provider   = aws.secondary
-  name       = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
+  provider = aws.secondary
+  name     = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
 }
 
 resource "aws_key_pair" "secondary-key" {
@@ -70,7 +70,7 @@ resource "aws_instance" "db-saz-b" {
     var.udc_default_tags,
     {
       Name = join("-", ["Udacity m4 - db-instance", count.index + 1, "b"])
-      Tier = "Db"
+      Tier = "DB"
     }
   )
   root_block_device {

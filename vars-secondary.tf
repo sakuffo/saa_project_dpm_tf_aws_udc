@@ -6,6 +6,7 @@ variable "secondary" {
     public-subnet-02  = string
     private-subnet-01 = string
     private-subnet-02 = string
+    s3-bucket-01      = string
   })
   default = {
     region            = "us-west-2"
@@ -13,6 +14,7 @@ variable "secondary" {
     public-subnet-02  = "us-west-2b"
     private-subnet-01 = "us-west-2b" # swapped azs since I am only launching 1 m4 per vpc
     private-subnet-02 = "us-west-2a"
+    s3-bucket-01      = "saa-udc-secondary-bucket-task-5"
   }
 }
 
@@ -43,8 +45,8 @@ variable "secondary-db" {
     storage-type  = string
   })
   default = {
-    instance-type = "t2.micro"
-    count         = 1
+    instance-type = "m4.large"
+    count         = 0
     storage-size  = 20
     storage-type  = "gp2"
   }
