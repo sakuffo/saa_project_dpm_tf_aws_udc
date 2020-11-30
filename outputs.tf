@@ -23,8 +23,7 @@ output "secondary_loadbalancer_dns_name" {
   description = "DNS link for the load balancer which redirects to the web tier for secondary VPC"
 }
 
-# This output has a dependancy on the data generated in the generated data file. Can be uncommented for apply
-# Will have ot be commented out for destory
+
 # output "primary_web_tier_instances" {
 #  value = data.aws_instances.primary-web-tier-instances.ids
 #  depends_on = [ data.aws_instances.primary-web-tier-instances ] 

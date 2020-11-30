@@ -23,12 +23,14 @@ variable "primary-web" {
     count         = number
     storage-type  = string
     storage-size  = number
+    user_data_path  = string
   })
   default = {
     instance-type = "t2.micro"
     count         = 1
     storage-type  = "gp2"
     storage-size  = 10
+    user_data_path = "./user_data/web-svr-pvpc.sh"
   }
 }
 
@@ -38,16 +40,13 @@ variable "primary-db" {
     count         = number
     storage-size  = number
     storage-type  = string
+    user_data_path  = string
   })
   default = {
-    instance-type = "m4.large"
+    instance-type = "t3.medium"
     count         = 0
     storage-size  = 20
     storage-type  = "gp2"
+    user_data_path  = "./user_data/database.sh"
   }
-}
-
-variable "primary_web_user_data_path" {
-  type    = string
-  default = "./user_data/web-svr-pvpc.sh"
 }
