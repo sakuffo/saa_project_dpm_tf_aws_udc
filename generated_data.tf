@@ -5,7 +5,6 @@
 #   }
 
 #   instance_state_names = ["running"]
-#   depends_on           = [aws_instance.web-server-paz-a, aws_instance.web-server-paz-b ]
 # }
 
 # data "aws_instances" "secondary-web-tier-instances" {
@@ -15,7 +14,6 @@
 #   }
 
 #   instance_state_names = ["running"]
-#   depends_on           = [aws_instance.web-server-saz-a, aws_instance.web-server-saz-b ]
 # }
 
 # data "aws_instances" "primary-db-tier-instances" {
@@ -25,7 +23,6 @@
 #   }
 
 #   instance_state_names = ["running"]
-#   depends_on           = [aws_instance.web-server-paz-a, aws_instance.web-server-paz-b ]
 # }
 # data "aws_instances" "secondary-db-tier-instances" {
 #   provider = aws.primary
@@ -34,5 +31,4 @@
 #   }
 
 #   instance_state_names = ["running"]
-#   depends_on           = [aws_instance.web-server-paz-a, aws_instance.web-server-paz-b ]
 # }

@@ -1,23 +1,3 @@
-# data "aws_instances" "primary-web-tier-instances" {
-#   provider = aws.primary
-#   instance_tags = {
-#     Tier = "Web"
-#   }
-
-#   instance_state_names = ["running"]
-#   depends_on           = [aws_instance.web-server-paz-a, aws_instance.web-server-paz-b ]
-# }
-
-# data "aws_instances" "secondary-web-tier-instances" {
-#   provider = aws.secondary
-#   instance_tags = {
-#     Tier = "Web"
-#   }
-
-#   instance_state_names = ["running"]
-#   depends_on           = [aws_instance.web-server-saz-a, aws_instance.web-server-saz-b ]
-# }
-
 resource "aws_lb" "primary_front_end_alb" {
   provider           = aws.primary
   name               = "primary-alb"
@@ -34,6 +14,7 @@ resource "aws_lb_target_group" "primary_front_end_tg" {
   port     = var.web-server-port
   protocol = "HTTP"
   vpc_id   = aws_vpc.primary-vpc.id
+  depends_on = [ aws_lb.primary_front_end_alb ]
   tags     = var.udc_default_tags
 }
 
@@ -97,6 +78,7 @@ resource "aws_lb_target_group" "secondary_front_end_tg" {
   port     = var.web-server-port
   protocol = "HTTP"
   vpc_id   = aws_vpc.secondary-vpc.id
+  depends_on = [ aws_lb.secondary_front_end_alb ]
   tags     = var.udc_default_tags
 }
 

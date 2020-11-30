@@ -19,7 +19,7 @@ resource "aws_instance" "web-server-saz-a" {
   associate_public_ip_address = true
   subnet_id                   = aws_subnet.secondary-subnet-01.id
   vpc_security_group_ids      = [aws_security_group.secondary-web-tier.id]
-  user_data                   = file(var.secondary_web_user_data_path)
+  user_data                   = file(var.secondary-web.user_data_path)
   tags = merge(
     var.udc_default_tags,
     {
@@ -42,7 +42,7 @@ resource "aws_instance" "web-server-saz-b" {
   associate_public_ip_address = true
   subnet_id                   = aws_subnet.secondary-subnet-02.id
   vpc_security_group_ids      = [aws_security_group.secondary-web-tier.id]
-  user_data                   = file(var.primary_web_user_data_path)
+  user_data                   = file(var.secondary-web.user_data_path)
   tags = merge(
     var.udc_default_tags,
     {
@@ -65,7 +65,7 @@ resource "aws_instance" "db-saz-b" {
   associate_public_ip_address = false
   subnet_id                   = aws_subnet.secondary-subnet-02.id
   vpc_security_group_ids      = [aws_security_group.secondary-db-tier.id]
-  user_data                   = file(var.db_user_data_path)
+  user_data                   = file(var.secondary-db.user_data_path)
   tags = merge(
     var.udc_default_tags,
     {
