@@ -6,14 +6,22 @@ Meets Specification simply asks to deploy against an exisiting VPC, using an exi
 
 To kick it up a notch i decide to include some extra spec, some of which are included from the extra credit for Project Ruburic.
 Due to time constraints and a family emergency, I had to bring back the scope to submit the project. Stretch goals will be implemented over time.
-## Meets Specification:
+## Project Specification:
 
-1.  Use Terraform to provision in two regions
+1.  Used Terraform to provision in two regions each with:
     - A VPC
     - Public Subnets in each AZ (a & b)
     - Private Subnets in each AZ
+    - Application loab balancer (ALB)
+    - ALB listeners
+    - Target Group
+    - 3 EC2 instances (2 x t2.micro and 1 x m4.large) * This is per region so a total of 6 for the min spec
+    - Security Groups
+    - Routing and Routing Tables
     - EC2 instances. 2 x t2.micros with 10GB EBS per region and 1 m4.large with 20GB EBS
-    - S3 buckets in each region (eventually to be used for image storage)
+    - User data for the EC2 instances
+    - SSH Keys * please note you will have to create a key with the same name as what is in vars.tf
+    - S3 buckets in each region (eventually to be used for image storage) * Due to bucket global naming this is commented out. Can be replaced with prefered buckets in the vars-primary/vars-secondary.tf file in the primary or secondary object. Field:s3-bucket-01
 
 2. Breakout the terraform files into modules, including at least
     - vars.tf

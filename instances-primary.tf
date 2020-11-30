@@ -1,9 +1,3 @@
-## EC2 Primary-VPC AMI image
-data "aws_ssm_parameter" "amz2-ami-primary" {
-  provider = aws.primary
-  name     = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
-}
-
 
 ## EC2 Primary-VPC Instance ssh keys
 resource "aws_key_pair" "primary-key" {
@@ -16,7 +10,7 @@ resource "aws_key_pair" "primary-key" {
 resource "aws_instance" "web-server-paz-a" {
   provider                    = aws.primary
   count                       = var.primary-web.count
-  ami                         = data.aws_ssm_parameter.amz2-ami-primary.value
+  ami                         = var.primary-web.ami
   instance_type               = var.primary-web.instance-type
   key_name                    = aws_key_pair.primary-key.key_name
   associate_public_ip_address = true
@@ -39,7 +33,7 @@ resource "aws_instance" "web-server-paz-a" {
 resource "aws_instance" "web-server-paz-b" {
   provider                    = aws.primary
   count                       = var.primary-web.count
-  ami                         = data.aws_ssm_parameter.amz2-ami-primary.value
+  ami                         = var.primary-web.ami
   instance_type               = var.primary-web.instance-type
   key_name                    = aws_key_pair.primary-key.key_name
   associate_public_ip_address = true
@@ -62,7 +56,7 @@ resource "aws_instance" "web-server-paz-b" {
 resource "aws_instance" "db-paz-a" {
   provider                    = aws.primary
   count                       = var.primary-db.count
-  ami                         = data.aws_ssm_parameter.amz2-ami-primary.value
+  ami                         = var.primary-db.ami
   instance_type               = var.primary-db.instance-type
   key_name                    = aws_key_pair.primary-key.key_name
   associate_public_ip_address = false

@@ -1,8 +1,3 @@
-data "aws_ssm_parameter" "amz2-ami-secondary" {
-  provider = aws.secondary
-  name     = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
-}
-
 resource "aws_key_pair" "secondary-key" {
   provider   = aws.secondary
   key_name   = "udc_rsa"
@@ -13,7 +8,7 @@ resource "aws_key_pair" "secondary-key" {
 resource "aws_instance" "web-server-saz-a" {
   provider                    = aws.secondary
   count                       = var.secondary-web.count
-  ami                         = data.aws_ssm_parameter.amz2-ami-secondary.value
+  ami                         = var.secondary-web.ami
   instance_type               = var.secondary-web.instance-type
   key_name                    = aws_key_pair.secondary-key.key_name
   associate_public_ip_address = true
@@ -36,7 +31,7 @@ resource "aws_instance" "web-server-saz-a" {
 resource "aws_instance" "web-server-saz-b" {
   provider                    = aws.secondary
   count                       = var.secondary-web.count
-  ami                         = data.aws_ssm_parameter.amz2-ami-secondary.value
+  ami                         = var.secondary-web.ami
   instance_type               = var.secondary-web.instance-type
   key_name                    = aws_key_pair.secondary-key.key_name
   associate_public_ip_address = true
@@ -59,7 +54,7 @@ resource "aws_instance" "web-server-saz-b" {
 resource "aws_instance" "db-saz-b" {
   provider                    = aws.secondary
   count                       = var.secondary-db.count
-  ami                         = data.aws_ssm_parameter.amz2-ami-secondary.value
+  ami                         = var.secondary-db.ami
   instance_type               = var.secondary-db.instance-type
   key_name                    = aws_key_pair.secondary-key.key_name
   associate_public_ip_address = false

@@ -9,13 +9,13 @@ resource "aws_lb" "primary_front_end_alb" {
   tags = var.udc_default_tags
 }
 resource "aws_lb_target_group" "primary_front_end_tg" {
-  provider = aws.primary
-  name     = "primary-front-end-tg"
-  port     = var.web-server-port
-  protocol = "HTTP"
-  vpc_id   = aws_vpc.primary-vpc.id
-  depends_on = [ aws_lb.primary_front_end_alb ]
-  tags     = var.udc_default_tags
+  provider   = aws.primary
+  name       = "primary-front-end-tg"
+  port       = var.web-server-port
+  protocol   = "HTTP"
+  vpc_id     = aws_vpc.primary-vpc.id
+  depends_on = [aws_lb.primary_front_end_alb]
+  tags       = var.udc_default_tags
 }
 
 resource "aws_lb_listener" "primary_front_end_listner" {
@@ -73,13 +73,13 @@ resource "aws_lb" "secondary_front_end_alb" {
 }
 
 resource "aws_lb_target_group" "secondary_front_end_tg" {
-  provider = aws.secondary
-  name     = "secondary-front-end-tg"
-  port     = var.web-server-port
-  protocol = "HTTP"
-  vpc_id   = aws_vpc.secondary-vpc.id
-  depends_on = [ aws_lb.secondary_front_end_alb ]
-  tags     = var.udc_default_tags
+  provider   = aws.secondary
+  name       = "secondary-front-end-tg"
+  port       = var.web-server-port
+  protocol   = "HTTP"
+  vpc_id     = aws_vpc.secondary-vpc.id
+  depends_on = [aws_lb.secondary_front_end_alb]
+  tags       = var.udc_default_tags
 }
 
 # The below is a work around while I debug the iterative attachment
