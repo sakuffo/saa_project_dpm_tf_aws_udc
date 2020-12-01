@@ -24,7 +24,6 @@ variable "secondary-web" {
     count          = number
     storage-type   = string
     storage-size   = number
-    ami            = string
     user_data_path = string
   })
   default = {
@@ -32,7 +31,6 @@ variable "secondary-web" {
     count          = 1
     storage-type   = "gp2"
     storage-size   = 10
-    ami            = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
     user_data_path = "./user_data/web-svr-svpc.sh"
   }
 }
@@ -42,15 +40,13 @@ variable "secondary-db" {
     count          = number
     storage-size   = number
     storage-type   = string
-    ami            = string
     user_data_path = string
   })
   default = {
     instance-type  = "t3.medium"
-    count          = 0
+    count          = 1
     storage-size   = 20
     storage-type   = "gp2"
-    ami            = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
     user_data_path = "./user_data/database.sh"
   }
 }

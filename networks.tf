@@ -1,4 +1,4 @@
-# Primary Subnet AZ1
+# Primary Subnet Public AZ-1
 resource "aws_subnet" "primary-subnet-01" {
   provider                = aws.primary
   vpc_id                  = aws_vpc.primary-vpc.id
@@ -13,7 +13,7 @@ resource "aws_subnet" "primary-subnet-01" {
   )
 }
 
-# Primary Subnet AZ2
+# Primary Subnet Public AZ-2
 resource "aws_subnet" "primary-subnet-02" {
   provider                = aws.primary
   vpc_id                  = aws_vpc.primary-vpc.id
@@ -28,7 +28,7 @@ resource "aws_subnet" "primary-subnet-02" {
     }
   )
 }
-
+# Primary Subnet Private AZ-1
 resource "aws_subnet" "primary-private-subnet-01" {
   provider          = aws.primary
   vpc_id            = aws_vpc.primary-vpc.id
@@ -43,7 +43,7 @@ resource "aws_subnet" "primary-private-subnet-01" {
   )
 }
 
-# Secondary Subnet AZ1
+# Secondary Subnet Public AZ-1
 resource "aws_subnet" "secondary-subnet-01" {
   provider          = aws.secondary
   vpc_id            = aws_vpc.secondary-vpc.id
@@ -58,7 +58,7 @@ resource "aws_subnet" "secondary-subnet-01" {
   )
 }
 
-# Secondary Subnet AZ2
+# Secondary Subnet Public AZ-2
 resource "aws_subnet" "secondary-subnet-02" {
   provider          = aws.secondary
   vpc_id            = aws_vpc.secondary-vpc.id
@@ -73,7 +73,7 @@ resource "aws_subnet" "secondary-subnet-02" {
   )
 }
 
-
+# Secondary Subnet Private AZ-2 (There is no AZ-1 in this case)
 resource "aws_subnet" "primary-private-subnet-02" {
   provider          = aws.secondary
   vpc_id            = aws_vpc.secondary-vpc.id

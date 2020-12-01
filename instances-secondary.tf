@@ -1,14 +1,23 @@
+# EC2 AMI images
+data "aws_ssm_parameter" "amz2-ami-secondary" {
+  provider = aws.secondary
+  name     = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
+}
+
+# EC2 Secondary-VPC Instance ssh keys
 resource "aws_key_pair" "secondary-key" {
   provider   = aws.secondary
   key_name   = "udc_rsa"
   public_key = file(var.ssh_path)
 }
 
+# EC2 Secondary-VPC Instance creation
 
+# Instances in Secondary-VPC public az-a
 resource "aws_instance" "web-server-saz-a" {
   provider                    = aws.secondary
   count                       = var.secondary-web.count
-  ami                         = var.secondary-web.ami
+  ami                         = data.aws_ssm_parameter.amz2-ami-secondary.value
   instance_type               = var.secondary-web.instance-type
   key_name                    = aws_key_pair.secondary-key.key_name
   associate_public_ip_address = true
@@ -28,10 +37,11 @@ resource "aws_instance" "web-server-saz-a" {
   }
 }
 
+# Instances in Secondary-VPC public az-b
 resource "aws_instance" "web-server-saz-b" {
   provider                    = aws.secondary
   count                       = var.secondary-web.count
-  ami                         = var.secondary-web.ami
+  ami                         = data.aws_ssm_parameter.amz2-ami-secondary.value
   instance_type               = var.secondary-web.instance-type
   key_name                    = aws_key_pair.secondary-key.key_name
   associate_public_ip_address = true
@@ -51,10 +61,11 @@ resource "aws_instance" "web-server-saz-b" {
   }
 }
 
+# Instances in Secondary-VPC private az-b
 resource "aws_instance" "db-saz-b" {
   provider                    = aws.secondary
   count                       = var.secondary-db.count
-  ami                         = var.secondary-db.ami
+  ami                         = data.aws_ssm_parameter.amz2-ami-secondary.value
   instance_type               = var.secondary-db.instance-type
   key_name                    = aws_key_pair.secondary-key.key_name
   associate_public_ip_address = false

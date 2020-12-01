@@ -8,18 +8,17 @@ terraform {
   }
 }
 
-# AWS provider with alias definitions for primary and secondary regions
+# AWS provider with alias definitions for primary region
 provider "aws" {
   alias  = "primary"
   region = var.primary.region
 }
 
+# AWS provider with alias definitions for secondary region
 provider "aws" {
   alias  = "secondary"
   region = var.secondary.region
 }
-
-## Primary VPC definitions
 
 ## Primary VPC
 resource "aws_vpc" "primary-vpc" {
@@ -36,7 +35,7 @@ resource "aws_vpc" "primary-vpc" {
   )
 }
 
-# Secondary VPC definitions
+# Secondary VPC 
 resource "aws_vpc" "secondary-vpc" {
   provider             = aws.secondary
   cidr_block           = "172.10.0.0/16"

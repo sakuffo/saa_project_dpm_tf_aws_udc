@@ -1,4 +1,6 @@
 # To start up S3 buckets please change the bucket name in the variable file for primary and secondary
+
+# Primary S3 Bucket
 resource "aws_s3_bucket" "primary-s3-bucket" {
   provider = aws.primary
   bucket   = var.primary.s3-bucket-01
@@ -17,6 +19,7 @@ resource "aws_s3_bucket" "primary-s3-bucket" {
   }
 }
 
+# Secondary S3 Bucket
 resource "aws_s3_bucket" "secondary-s3-bucket" {
   provider = aws.secondary
   bucket   = var.secondary.s3-bucket-01

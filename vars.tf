@@ -8,8 +8,6 @@ variable "udc_default_tags" {
   description = "Tags to mark all resources for the course"
 }
 
-
-
 variable "ssh_path" {
   type    = string
   default = "~/.ssh/udc_rsa.pub"
@@ -20,17 +18,22 @@ variable "db_user_data_path" {
   default = "./user_data/database.sh"
 }
 
-variable "web-server-port" {
+variable "http-traffic-port" {
   type    = number
   default = 80
 }
 
-variable "web_instace_per_vpc" {
+variable "ssh-traffic-port" {
+  type    = number
+  default = 22
+}
+
+variable "database-traffic-port" {
+  type    = number
+  default = 3306
+}
+
+variable "public_subnet_count" {
   type    = number
   default = 2
 }
-# This variable is a fix for a temporary chicken and egg problem
-# attaching multiple instances to a target group with a single resource requires  it knows how many instances to iterate through
-# To iterate through it needs to compute that come created instances
-# This has not yet happened on greenfield deployment
-# I will eventually fix this with some sot of for_each iterator however for time reasons I am going with this short fix
