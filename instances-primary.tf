@@ -1,18 +1,19 @@
-## EC2 Primary-VPC AMI image
+# EC2 AMI images
 data "aws_ssm_parameter" "amz2-ami-primary" {
   provider = aws.primary
   name     = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
 }
 
-
-## EC2 Primary-VPC Instance ssh keys
+# EC2 Primary-VPC Instance ssh keys
 resource "aws_key_pair" "primary-key" {
   provider   = aws.primary
   key_name   = "udc_rsa"
   public_key = file(var.ssh_path)
 }
 
-## EC2 Primary-VPC Instance creation
+# EC2 Primary-VPC Instance creation
+
+# Instances in Primary-VPC public az-a
 resource "aws_instance" "web-server-paz-a" {
   provider                    = aws.primary
   count                       = var.primary-web.count
@@ -36,6 +37,7 @@ resource "aws_instance" "web-server-paz-a" {
   }
 }
 
+# Instances in Primary-VPC public az-b
 resource "aws_instance" "web-server-paz-b" {
   provider                    = aws.primary
   count                       = var.primary-web.count
@@ -59,6 +61,7 @@ resource "aws_instance" "web-server-paz-b" {
   }
 }
 
+# Instances in Primary-VPC private az-a
 resource "aws_instance" "db-paz-a" {
   provider                    = aws.primary
   count                       = var.primary-db.count
