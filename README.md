@@ -4,8 +4,7 @@
 Objective is to create an AWS environment with terraform
 Meets Specification simply asks to deploy against an exisiting VPC, using an exisiting public subnet. The payload is simply 4 x t2.micro EC2 instances and 2 m4.large EC2 instaces
 
-To kick it up a notch i decide to include some extra spec, some of which are included from the extra credit for Project Ruburic.
-Due to time constraints and a family emergency, I had to bring back the scope to submit the project. Stretch goals will be implemented over time.
+I decided to stretch those requirements out to include even more services. See below
 ## Project Specification:
 
 1.  Used Terraform to provision in two regions each with:
