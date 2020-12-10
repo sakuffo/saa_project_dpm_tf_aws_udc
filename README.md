@@ -83,11 +83,12 @@ The idea is to make sure everything I am doing in the course could actually be u
 -   If the environment this is applied against is not particularily static, you run the risk of the state file having resolution issues.
 In this case you may need to purge the statefile.
 
-## Stretch - WIP for after course
+## Work In Progress
 
 - Refactor code to be more real world
     - Make the web instances have an actual web app rather than just simple html string
-    - Connect the web app to the databaes
+        - - explore what can be broken off into Lambda
+    - Connect the web app to an RDS DB with read replica
     - Convert the databases from EC2 instances to RDS instances
     - Include a lambda function to upload images
     - Include a lambda function to retrieve images
