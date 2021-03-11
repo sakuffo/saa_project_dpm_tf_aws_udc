@@ -10,7 +10,7 @@ variable "udc_default_tags" {
 
 variable "ssh_path" {
   type    = string
-  default = "~/.ssh/udc_rsa.pub"
+  default = "~/.ssh/udac.pub"
 }
 
 variable "db_user_data_path" {

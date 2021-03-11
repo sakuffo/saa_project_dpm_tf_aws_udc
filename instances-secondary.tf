@@ -7,7 +7,7 @@ data "aws_ssm_parameter" "amz2-ami-secondary" {
 # EC2 Secondary-VPC Instance ssh keys
 resource "aws_key_pair" "secondary-key" {
   provider   = aws.secondary
-  key_name   = "udc_rsa"
+  key_name   = "udac"
   public_key = file(var.ssh_path)
 }
 
